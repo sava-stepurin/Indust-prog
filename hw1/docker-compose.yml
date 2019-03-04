@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+    rabbit:
+        image: "rabbitmq"
+        restart: always
+        ports:
+          - '5672:5672'
+    consumer:
+        build:
+            context: .
+            dockerfile: DockerSendFile
+        restart: always
+        depends_on:
+          - rabbit
+    producer:
+        build:
+            context: .
+            dockerfile: DockerReceiveFile
+        restart: always
+        depends_on:
+          - rabbit
+
