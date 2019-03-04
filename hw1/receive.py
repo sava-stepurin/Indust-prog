@@ -14,7 +14,7 @@ channel = connection.channel()
 channel.queue_declare(queue='queue')
 
 def callback(ch, method, properties, body):
-    print("Received %r" % body)
+    print(f"Received {body.decode()}")
 
 channel.basic_consume(callback,
                       queue='queue',
